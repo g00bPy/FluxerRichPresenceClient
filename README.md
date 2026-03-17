@@ -17,6 +17,15 @@
 
 I built this client to provide a "Set it and Forget it" solution. Whether you are battling in a game, designing in Creative Cloud, or debugging in PyCharm, this client ensures your Fluxer community knows exactly what you're up to—complete with high-resolution emotes and real-time "Time Elapsed" counters.
 
+## 🛡️ Architectural Transparency & Safety
+
+To ensure account safety and platform integrity, it is important to understand exactly how FRPC operates:
+
+* **Non-Invasive Architecture:** This application **does not modify, inject code into, or "mod" the Fluxer client** in any way. It runs as a completely independent "sidecar" process on your operating system.
+* **Direct-to-Fluxer Only:** The application communicates strictly and directly with `api.fluxer.app` and the official Fluxer Gateway. **No data is ever sent to third-party servers or external services.**
+* **Pure Status Automation:** The client's scope is purely limited to automating your **Custom Status message**. It uses official WebSocket (Gateway) and REST API protocols to keep your profile updated based on your local activity.
+* **Local Token Security:** Your account token is handled exclusively within your local machine's secure environment and is never exposed to external network calls outside of official Fluxer endpoints.
+
 ## ✨ Core Feature Set
 
 ### 🔍 Smart Activity Engine
@@ -30,11 +39,6 @@ This client introduces the first dedicated **Emote Picker** for Fluxer desktop u
 * **Direct API Sync:** Securely queries your server memberships to pull every custom emote available to your account.
 * **Animated WebP Support:** Full support for animated emotes. Unlike standard implementations, this client uses a custom rendering engine to preserve aspect ratios, ensuring emotes are never squished or cropped.
 * **Local Caching:** Stores and manages emote data locally to ensure lightning-fast load times and minimal API impact.
-
-### 🔒 Security-by-Design
-Privacy is the foundation of this project.
-* **Local Auth Only:** Your Fluxer token is never transmitted to any third-party servers. All connections are made strictly and directly to `api.fluxer.app`.
-* **Hardware-Level Encryption:** On the full version of this client, sensitive data is vaulted using local machine security protocols to ensure your session remains private.
 
 ### ⚡ Performance Optimized
 * **Asynchronous Architecture:** Built on `asyncio` and `websockets`, the client maintains a constant connection to the Fluxer Gateway with near-zero CPU overhead.
@@ -80,4 +84,4 @@ Privacy is the foundation of this project.
 ---
 **Developed with 💜 by [g00by](https://github.com/g00bPy)**
 
-*I am **not** affiliated with, nor do I work for, Fluxer. This is an independent open-source project.*
+*I am a passionate Python developer who loves building tools for the communities I enjoy. Please note that I am **not** affiliated with, nor do I work for, Fluxer. This is an independent open-source project.*
