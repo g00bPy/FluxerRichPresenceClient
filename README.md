@@ -1,4 +1,5 @@
-# FluxerRichPresenceClient (FRPC) 🟣 
+
+# FluxPresence (FluxPresence) 🟣 
 
 [![Python Version](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -7,22 +8,22 @@
 > [!CAUTION]
 > **Active Development Notice:** This client is currently in heavy active development. Full source code and compiled `.exe` releases will be published ASAP. As I maintain a full-time career, updates are pushed during my personal time—thank you for your patience and support!
 
-**FluxerRichPresenceClient** is a standalone Windows desktop utility for [Fluxer](https://fluxer.app/). It watches what's running on your PC and automatically updates your Fluxer Custom Status to reflect your current activity — the app you're using, how long you've been using it, and an emoji of your choice.
+**FluxPresence** is a standalone Windows desktop utility for [Fluxer](https://fluxer.app/). It watches what's running on your PC and automatically updates your Fluxer Custom Status to reflect your current activity — the app you're using, how long you've been using it, and an emoji of your choice.
 
-Fluxer is an incredible, rapidly growing platform — but right now if you're deep in a gaming session or a coding sprint, your profile just shows "Online" with no indication of what you're actually doing. FRPC is a "Set it and Forget it" fix. Configure your apps once, and your status automatically shows what you're doing with a minute-by-minute elapsed timer and a custom emoji.
+Fluxer is an incredible, rapidly growing platform — but right now if you're deep in a gaming session or a coding sprint, your profile just shows "Online" with no indication of what you're actually doing. FluxPresence is a "Set it and Forget it" fix. Configure your apps once, and your status automatically shows what you're doing with a minute-by-minute elapsed timer and a custom emoji.
 
 > [!NOTE]
-> **This is a temporary solution.** Fluxer doesn't currently have a native Rich Presence framework. FRPC fills that gap by automating your Custom Status message using the existing Fluxer REST API. Once Fluxer ships native RP support, this client will likely become obsolete when that time comes.
+> **This is a temporary solution.** Fluxer doesn't currently have a native Rich Presence framework. FluxPresence fills that gap by automating your Custom Status message using the existing Fluxer REST API. Once Fluxer ships native RP support, this client will likely become obsolete when that time comes.
 >
 > **What this actually is:** A status message automator. It sets the same Custom Status you'd type in manually, just automatically based on what's running on your machine.
 >
-> **What this is NOT:** A game SDK integration. FRPC cannot pull in-game data (match scores, character info, lobby details). If you want that level of detail, check out [fluxer-rpc](https://github.com/letruxux/fluxer-rpc) — it mirrors your Discord Rich Presence data to Fluxer via Lanyard and is a great project for users who already have Discord running. FRPC takes a different approach entirely: no Discord needed, no Lanyard setup — it works standalone by detecting running apps and reading window titles directly from your OS.
+> **What this is NOT:** A game SDK integration. FluxPresence cannot pull in-game data (match scores, character info, lobby details, ETC.). If you want that level of detail, check out [fluxer-rpc](https://github.com/letruxux/fluxer-rpc)! — it mirrors your Discord Rich Presence data to Fluxer via Lanyard and is a great project for users who already have Discord running. FluxPresence takes a different approach entirely: no Discord needed, no Lanyard setup — it works standalone by detecting running apps and reading window titles directly from your OS.
 
 ---
 
 ## 🛡️ Safety & Transparency
 
-* **Non-Invasive:** FRPC does **not** modify, inject into, or "mod" the Fluxer client. It runs as a completely independent process.
+* **Non-Invasive:** FluxPresence does **not** modify, inject into, or "mod" the Fluxer client. It runs as a completely independent process.
 * **Direct-to-Fluxer Only:** All network calls go strictly to `api.fluxer.app`. No data is ever sent to third-party servers.
 * **Custom Status + Presence:** The client automates your Custom Status message via the Fluxer REST API. It also properly manages your online/away presence state — correcting Fluxer's tendency to mark you "Away" when you're simply active in another application.
 * **Token Security:** Your token is encrypted locally using Windows DPAPI and stored in the Windows Registry. It never leaves your machine except in authenticated calls to `api.fluxer.app`.
@@ -80,8 +81,8 @@ Status syncs to Fluxer every 60 seconds via REST. Local app detection runs every
 
 ### Setup
 ```bash
-git clone https://github.com/g00bPy/FluxerRichPresenceClient.git
-cd FluxerRichPresenceClient
+git clone https://github.com/g00bPy/FluxPresence.git
+cd FluxPresence
 pip install PySide6 psutil pywin32 emoji
 python main.py
 ```
@@ -95,10 +96,10 @@ pip install winrt-Windows.Media.Control winrt-Windows.Foundation winrt-Windows.F
 
 ## ⚠️ Limitations
 
-- **No in-game data.** FRPC sees that a game is running and can read its window title, but it cannot access match info, character data, or lobby details. Discord's Game SDK sends that data through a private local IPC pipe directly to the Discord client, and from there it travels over Discord's encrypted network — there's nothing static or readable that FRPC could intercept or reuse.
-- **Different tool than fluxer-rpc.** [fluxer-rpc](https://github.com/letruxux/fluxer-rpc) is an excellent project that mirrors your Discord Rich Presence to Fluxer via Lanyard — giving you detailed game info, music status, and more. It requires Discord running + Lanyard setup. FRPC is a standalone alternative for users who want activity status without depending on Discord at all.
-- **Windows only (for now).** FRPC depends on Windows APIs (DPAPI, Registry, win32gui, SMTC). Linux and macOS versions are planned for the future.
-- **Custom Status + presence scope.** FRPC controls your Custom Status text/emoji and manages your online/away presence state. It does not interact with any other Fluxer features (messages, servers, etc.).
+- **No in-game data.** FluxPresence sees that a game is running and can read its window title, but it cannot access match info, character data, or lobby details. Discord's Game SDK sends that data through a private local IPC pipe directly to the Discord client, and from there it travels over Discord's encrypted network — there's nothing static or readable that FluxPresence could intercept or reuse.
+- **Different tool than fluxer-rpc.** [fluxer-rpc](https://github.com/letruxux/fluxer-rpc) is an excellent project that mirrors your Discord Rich Presence to Fluxer via Lanyard — giving you detailed game info, music status, and more. It requires Discord running + Lanyard setup. FluxPresence is a standalone alternative for users who want activity status without depending on Discord at all.
+- **Windows only (for now).** FluxPresence depends on Windows APIs (DPAPI, Registry, win32gui, SMTC). Linux and macOS versions are planned for the future.
+- **Custom Status + presence scope.** FluxPresence controls your Custom Status text/emoji and manages your online/away presence state. It does not interact with any other Fluxer features (messages, servers, etc.).
 
 ---
 
@@ -116,6 +117,6 @@ pip install winrt-Windows.Media.Control winrt-Windows.Foundation winrt-Windows.F
 
 ---
 
-**Developed with 💜 by [g00by](https://github.com/g00bPy)**
+**Developed with 💜 by [g00by](https://github.com/g00bPy) - Jackson K.**
 
 *Passionate Python developer building tools for communities I enjoy. Not affiliated with Fluxer — this is an independent open-source project.*
